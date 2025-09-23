@@ -11,7 +11,23 @@
 </head>
 
 <body class="overflow-hidden">
-    <?php $num = $_POST['num']; ?>
+    <?php 
+    
+    $data_inicial = date("m-d-Y", strtotime("-7 days"));
+    $data_final = date("m-d-Y");
+    $url = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/
+        CotacaoDolarPeriodo(dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?
+        @dataInicial=\''.$data_inicial.'\'&@dataFinalCotacao=\''.$data_final.
+        '\'&$top=1&$orderby=dataHoraCotacao%20desc&$format=json&$select=cotacaoCompra,dataHoraCotacao';
+
+    $dados = json_decode(file_get_contents($url), true);
+    $cotacao = $dados["value"][0]["cotacaoCompra"];
+
+    $real = $_REQUEST['money'] ?? 0;
+    $dolar = $real / $cotacao;
+
+    $currency_format = numfmt_create("pt-BR", NumberFormatter::CURRENCY);
+    ?>
 
     <!-- Aba 1: Conteúdo centralizado -->
     <div class="d-flex justify-content-center align-items-center min-vh-100">
@@ -20,13 +36,10 @@
 
             <div class="result bg-black rounded p-3">
                 <p class="text-white">
-                    <?= "Valor Inserido: ".($num);  ?>
+                    <?= "Valor Inserido (R$): ".$real;  ?>
                 </p>
                 <p class="text-white">
-                    <?= "Antecessor: "   .($num-1);  ?>
-                </p>
-                <p class="text-white">
-                    <?= "Sucessor: "     .($num+1);  ?>
+                    <?= "Valor em Dólar: ".$dolar;  ?>
                 </p>
             </div>
 

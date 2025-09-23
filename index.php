@@ -1,4 +1,4 @@
-00<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +27,9 @@
             </li>
             <li class="nav-item">
                 <a href="#tab3Id" class="nav-link" data-bs-toggle="tab">Conversor de Moedas Básico</a>
+            </li>
+            <li class="nav-item">
+                <a href="#tab4Id" class="nav-link" data-bs-toggle="tab">Conversor de Moedas Avançado</a>
             </li>
         </ul>
     </nav>
@@ -84,6 +87,27 @@
                         <div class="d-flex align-items-center">
                             <label for="money" class="form-label text-nowrap">Valor <strong>R$</strong></label>
                             <input type="number" step="any" class="form-control ms-2" name="money" id="money" />
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <input class="btn btn-primary mt-3" type="submit" value="Calcular">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aba 3: Conteúdo centralizado -->
+        <div class="tab-pane fade show" id="tab4Id" role="tabpanel">
+            <div class="d-flex justify-content-center align-items-center text-center min-vh-100">
+                <div class="bg-white p-4 rounded shadow-sm w-100" style="max-width: 400px;">
+                    <h5 class="mb-3">Conversor de Moedas Avançado (por API)</h5>
+                    <p>*Baseado na API do Banco Central</p>
+
+                    <form action="./response/4.php" method="post" class="mb-3">
+                        <div class="d-flex align-items-center">
+                            <label for="money" class="form-label text-nowrap">Valor <strong>R$</strong></label>
+                            <input type="number" step="0.01" class="form-control ms-2" name="money" id="money" />
                         </div>
 
                         <div class="d-grid mt-3">
