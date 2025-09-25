@@ -11,7 +11,7 @@
 </head>
 
 <body class="overflow-hidden">
-    <?php $value = $_POST['value']; ?>
+    <?php $value = $_POST['real_num'];?>
 
     <!-- Aba 1: Conteúdo centralizado -->
     <div class="d-flex justify-content-center align-items-center min-vh-100">
@@ -20,14 +20,16 @@
 
             <div class="result bg-black rounded p-3">
                 <p class="text-white">
-                    <?= "Valor Inserido: ".($value);  ?>
+                    <?= "Valor Inserido: ".$value;  ?>            
                 </p>
-                <p class="text-white">
-                    <?= "Parte Inteira: " .($value);  ?>
-                </p>
-                <p class="text-white">
-                    <?= "Parte Decimal: " .($value);  ?>
-                </p>
+                <ul class="text-white">
+                    <li>
+                        <?= "Parte Inteira: " .(int) $value;  ?>
+                    </li> 
+                    <li>
+                        <?= "Parte Decimal: " .number_format($value - (int) $value, 3, ",", ".");  ?>
+                    </li>
+                </ul>           
             </div>
 
             <div class="d-grid mt-3">
